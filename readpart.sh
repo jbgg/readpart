@@ -79,14 +79,14 @@ read_partitions()
 	for pnum in 0 1 2 3; do
 		ltype=`read8 -j $((loffset+4)) ${sectfile}`
 		case ${ltype} in
-			'00')
+			'00') # invalid partition
 				;;
-			'05')
+			'05') # extended partition
 				lstart=`read32 -j $((${loffset}+8)) ${sectfile}`
 				lstart=`printf "%x" $(( 0x${lstart} + 0x${psect} ))`
 				read_partitions ${lstart}
 				;;
-			*)
+			*) # other partition
 				echo -n ${gpnum}
 				echo -n " `read8 -j $((${loffset})) ${sectfile}`"
 				echo -n " ${ltype}"
