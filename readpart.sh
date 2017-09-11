@@ -1,5 +1,5 @@
 #!/bin/sh
-## readpart.sh 0.01 jbgg ##
+## readpart.sh 0.02 jbgg ##
 
 
 
@@ -10,11 +10,11 @@ read8(){
 }
 
 read16(){
-	od --endian=little -t x2 -N 2 $* | awk 'NR==1{print $2}'
+	od -t x2 -N 2 $* | awk 'NR==1{print $2}'
 }
 
 read32(){
-	od --endian=little -t x4 -N 4 $* | awk 'NR==1{print $2}'
+	od -t x4 -N 4 $* | awk 'NR==1{print $2}'
 }
 
 
@@ -123,7 +123,8 @@ fi
 gpnum=0
 partlist=`read_partitions 0`
 
-echo " ** partlist:\n${partlist}"
+echo " ** partlist:
+${partlist}"
 
 
 
